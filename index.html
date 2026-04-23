@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Registro de Jugadores — Choque de Héroes TCG</title>
+  <title>Registro de Jugadores — Choque de Héroes</title>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -373,14 +373,14 @@
         <button class="btn" id="submit-btn" onclick="submitForm()">
           ⚔ &nbsp;REGISTRARME
         </button>
-        <p class="disclaimer">Al registrarte aceptas recibir noticias y actualizaciones de Choque de Héroes. Sin spam. Los héroes te necesitan, la victoria está en tus manos</p>
+        <p class="disclaimer">Al registrarte aceptas recibir noticias y actualizaciones de Choque de Héroes. Sin spam.</p>
       </div>
 
       <!-- SUCCESS PANEL -->
       <div id="success-panel">
         <div class="hero-icon">⚔️</div>
         <div class="badge">¡REGISTRO EXITOSO!</div>
-        <h2 class="card-title" style="color: var(--accent);">¡BIENVENIDO HÉROE / HEROÍNA!</h2>
+        <h2 class="card-title" style="color: var(--accent);">¡BIENVENIDO A LA ARENA!</h2>
         <p class="card-subtitle">Tu número de jugador oficial es:</p>
 
         <div class="player-id-box">
@@ -417,7 +417,7 @@
     // ============================================================
     // ⚙️  CONFIGURACIÓN — reemplaza con tu URL de Apps Script
     // ============================================================
-    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbykhyvPJUFqloTsQNAyhOg3FedlnuaUQ0FmdEU6RRDbWiapfXN2QlMmNpPT8Z4ALt-BeA/exec";
+    const APPS_SCRIPT_URL = "PEGA_AQUI_TU_URL_DE_APPS_SCRIPT";
     // ============================================================
 
     function showToast(msg, isError = false) {
@@ -471,10 +471,10 @@
       btn.innerHTML = '<span class="spinner"></span>REGISTRANDO...';
 
       try {
-        const res = await fetch(APPS_SCRIPT_URL, {
-          method: "POST",
-          headers: { "Content-Type": "text/plain" },
-          body: JSON.stringify({ name, nick, email })
+        const params = new URLSearchParams({ name, nick, email });
+        const res = await fetch(APPS_SCRIPT_URL + "?" + params.toString(), {
+          method: "GET",
+          redirect: "follow"
         });
 
         const data = await res.json();
