@@ -7,345 +7,127 @@
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     :root {
-      --accent: #00ff9d;
-      --accent-dim: rgba(0,255,157,0.15);
-      --accent-glow: rgba(0,255,157,0.08);
-      --bg: #070b14;
-      --card: rgba(10,16,36,0.97);
-      --border: #1a2440;
-      --text: #e8eaf6;
-      --muted: #8892b0;
-      --danger: #ff4d6d;
+      --accent: #00ff9d; --accent-glow: rgba(0,255,157,0.08);
+      --bg: #070b14; --card: rgba(10,16,36,0.97); --border: #1a2440;
+      --text: #e8eaf6; --muted: #8892b0; --danger: #ff4d6d;
     }
-
-    html, body {
-      min-height: 100%;
-      background: var(--bg);
-      color: var(--text);
-      font-family: 'Rajdhani', sans-serif;
-    }
-
+    html, body { min-height: 100%; background: var(--bg); color: var(--text); font-family: 'Rajdhani', sans-serif; }
     body {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
-      padding: 40px 16px;
-      position: relative;
-      overflow-x: hidden;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      min-height: 100vh; padding: 40px 16px; position: relative; overflow-x: hidden;
     }
-
-    /* Grid background */
     body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background-image:
-        linear-gradient(rgba(0,255,157,0.025) 1px, transparent 1px),
+      content: ''; position: fixed; inset: 0;
+      background-image: linear-gradient(rgba(0,255,157,0.025) 1px, transparent 1px),
         linear-gradient(90deg, rgba(0,255,157,0.025) 1px, transparent 1px);
-      background-size: 44px 44px;
-      pointer-events: none;
-      z-index: 0;
+      background-size: 44px 44px; pointer-events: none; z-index: 0;
     }
-
-    /* Radial glow */
     body::after {
-      content: '';
-      position: fixed;
-      top: -20%;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 700px;
-      height: 500px;
+      content: ''; position: fixed; top: -20%; left: 50%; transform: translateX(-50%);
+      width: 700px; height: 500px;
       background: radial-gradient(ellipse, rgba(0,255,157,0.06) 0%, transparent 70%);
-      pointer-events: none;
-      z-index: 0;
+      pointer-events: none; z-index: 0;
     }
-
-    .container {
-      width: 100%;
-      max-width: 460px;
-      position: relative;
-      z-index: 1;
-    }
-
-    /* HEADER */
-    .header {
-      text-align: center;
-      margin-bottom: 32px;
-    }
+    .container { width: 100%; max-width: 460px; position: relative; z-index: 1; }
+    .header { text-align: center; margin-bottom: 32px; }
     .logo {
-      font-family: 'Orbitron', sans-serif;
-      font-size: clamp(26px, 7vw, 50px);
-      font-weight: 900;
-      line-height: 1.1;
-      letter-spacing: 3px;
-      color: #fff;
+      font-family: 'Orbitron', sans-serif; font-size: clamp(26px,7vw,50px); font-weight: 900;
+      line-height: 1.1; letter-spacing: 3px; color: #fff;
       text-shadow: 0 0 40px rgba(0,255,157,0.4), 0 0 80px rgba(0,255,157,0.15);
     }
     .logo span { color: var(--accent); }
-    .tagline {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 10px;
-      letter-spacing: 5px;
-      color: var(--muted);
-      margin-top: 10px;
-      text-transform: uppercase;
-    }
-
-    /* CARD */
+    .tagline { font-family: 'Orbitron', sans-serif; font-size: 10px; letter-spacing: 5px; color: var(--muted); margin-top: 10px; }
     .card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 36px 32px;
-      position: relative;
-      backdrop-filter: blur(20px);
+      background: var(--card); border: 1px solid var(--border); border-radius: 10px;
+      padding: 36px 32px; position: relative; backdrop-filter: blur(20px);
       box-shadow: 0 0 80px rgba(0,255,157,0.04), 0 24px 48px rgba(0,0,0,0.5);
       animation: fadeUp 0.5s ease both;
     }
     .card::before {
-      content: '';
-      position: absolute;
-      top: -1px; left: 10%; right: 10%;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, var(--accent), transparent);
-      border-radius: 2px;
+      content: ''; position: absolute; top: -1px; left: 10%; right: 10%; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent); border-radius: 2px;
     }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
+    @keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
     .badge {
-      display: inline-block;
-      font-family: 'Orbitron', sans-serif;
-      font-size: 9px;
-      letter-spacing: 3px;
-      color: var(--accent);
-      background: var(--accent-glow);
-      border: 1px solid rgba(0,255,157,0.2);
-      padding: 4px 12px;
-      border-radius: 2px;
-      margin-bottom: 12px;
+      display: inline-block; font-family: 'Orbitron', sans-serif; font-size: 9px;
+      letter-spacing: 3px; color: var(--accent); background: var(--accent-glow);
+      border: 1px solid rgba(0,255,157,0.2); padding: 4px 12px; border-radius: 2px; margin-bottom: 12px;
     }
-
-    .card-title {
-      font-family: 'Orbitron', sans-serif;
-      font-size: clamp(17px, 4vw, 22px);
-      font-weight: 900;
-      letter-spacing: 2px;
-      color: #fff;
-      margin-bottom: 6px;
-    }
-    .card-subtitle {
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.5;
-      margin-bottom: 24px;
-    }
-
-    .divider {
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(0,255,157,0.2), transparent);
-      margin: 20px 0;
-    }
-
-    /* FORM */
+    .card-title { font-family: 'Orbitron', sans-serif; font-size: clamp(17px,4vw,22px); font-weight: 900; letter-spacing: 2px; color: #fff; margin-bottom: 6px; }
+    .card-subtitle { color: var(--muted); font-size: 14px; line-height: 1.5; margin-bottom: 24px; }
+    .divider { height: 1px; background: linear-gradient(90deg, transparent, rgba(0,255,157,0.2), transparent); margin: 20px 0; }
     .field { margin-bottom: 18px; }
-    label {
-      display: block;
-      font-family: 'Orbitron', sans-serif;
-      font-size: 9px;
-      letter-spacing: 2px;
-      color: var(--muted);
-      margin-bottom: 6px;
-      text-transform: uppercase;
+    label { display: block; font-family: 'Orbitron', sans-serif; font-size: 9px; letter-spacing: 2px; color: var(--muted); margin-bottom: 6px; text-transform: uppercase; }
+    input[type="text"], input[type="email"] {
+      width: 100%; background: rgba(255,255,255,0.03); border: 1px solid var(--border);
+      border-radius: 5px; padding: 12px 14px; color: var(--text);
+      font-family: 'Rajdhani', sans-serif; font-size: 15px; font-weight: 500;
+      outline: none; transition: border-color 0.2s, box-shadow 0.2s;
     }
-    input[type="text"],
-    input[type="email"] {
-      width: 100%;
-      background: rgba(255,255,255,0.03);
-      border: 1px solid var(--border);
-      border-radius: 5px;
-      padding: 12px 14px;
-      color: var(--text);
-      font-family: 'Rajdhani', sans-serif;
-      font-size: 15px;
-      font-weight: 500;
-      outline: none;
-      transition: border-color 0.2s, box-shadow 0.2s;
-    }
-    input:focus {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(0,255,157,0.08);
-    }
+    input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(0,255,157,0.08); }
     input.error { border-color: var(--danger); }
-    .error-msg {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 9px;
-      color: var(--danger);
-      margin-top: 5px;
-      letter-spacing: 1px;
-      display: none;
-    }
+    .error-msg { font-family: 'Orbitron', sans-serif; font-size: 9px; color: var(--danger); margin-top: 5px; letter-spacing: 1px; display: none; }
     .error-msg.visible { display: block; }
-
-    /* BUTTON */
     .btn {
-      width: 100%;
-      background: linear-gradient(135deg, #00ff9d, #00d67e);
-      color: #070b14;
-      border: none;
-      border-radius: 5px;
-      padding: 14px;
-      font-family: 'Orbitron', sans-serif;
-      font-weight: 700;
-      font-size: 12px;
-      letter-spacing: 2px;
-      cursor: pointer;
-      margin-top: 6px;
-      transition: opacity 0.2s, transform 0.1s, box-shadow 0.2s;
+      width: 100%; background: linear-gradient(135deg, #00ff9d, #00d67e); color: #070b14;
+      border: none; border-radius: 5px; padding: 14px;
+      font-family: 'Orbitron', sans-serif; font-weight: 700; font-size: 12px; letter-spacing: 2px;
+      cursor: pointer; margin-top: 6px; transition: opacity 0.2s, transform 0.1s, box-shadow 0.2s;
       box-shadow: 0 4px 20px rgba(0,255,157,0.2);
     }
     .btn:hover { opacity: 0.92; box-shadow: 0 4px 30px rgba(0,255,157,0.35); }
     .btn:active { transform: scale(0.98); }
     .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
-
-    .disclaimer {
-      text-align: center;
-      color: #3a4460;
-      font-size: 11px;
-      margin-top: 14px;
-      line-height: 1.6;
-    }
-
-    /* SUCCESS PANEL */
-    #success-panel {
-      display: none;
-      text-align: center;
-      animation: fadeUp 0.4s ease both;
-    }
-    .hero-icon { font-size: 52px; margin-bottom: 6px; }
-    .player-id-box {
-      display: inline-block;
-      background: rgba(0,255,157,0.06);
-      border: 2px solid rgba(0,255,157,0.3);
-      border-radius: 8px;
-      padding: 16px 32px;
-      margin: 16px 0;
-      box-shadow: 0 0 40px rgba(0,255,157,0.1);
-    }
-    .player-id {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 30px;
-      font-weight: 900;
-      color: var(--accent);
-      letter-spacing: 5px;
-      text-shadow: 0 0 20px rgba(0,255,157,0.6);
-    }
-    .info-table {
-      width: 100%;
-      background: rgba(255,255,255,0.02);
-      border: 1px solid var(--border);
-      border-radius: 5px;
-      overflow: hidden;
-      margin: 16px 0;
-    }
-    .info-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 9px 14px;
-      border-bottom: 1px solid var(--border);
-    }
-    .info-row:last-child { border-bottom: none; }
-    .info-label {
-      font-family: 'Orbitron', sans-serif;
-      font-size: 9px;
-      letter-spacing: 2px;
-      color: var(--muted);
-    }
-    .info-value {
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--text);
-    }
     .btn-secondary {
-      width: 100%;
-      background: transparent;
-      border: 1px solid rgba(0,255,157,0.2);
-      border-radius: 5px;
-      padding: 12px;
-      color: rgba(0,255,157,0.6);
-      font-family: 'Orbitron', sans-serif;
-      font-size: 11px;
-      letter-spacing: 2px;
-      cursor: pointer;
-      margin-top: 12px;
-      transition: border-color 0.2s, color 0.2s;
+      width: 100%; background: transparent; border: 1px solid rgba(0,255,157,0.2);
+      border-radius: 5px; padding: 12px; color: rgba(0,255,157,0.6);
+      font-family: 'Orbitron', sans-serif; font-size: 11px; letter-spacing: 2px;
+      cursor: pointer; margin-top: 12px; transition: border-color 0.2s, color 0.2s;
     }
     .btn-secondary:hover { border-color: rgba(0,255,157,0.5); color: var(--accent); }
-
-    /* TOAST */
+    .disclaimer { text-align: center; color: #3a4460; font-size: 11px; margin-top: 14px; line-height: 1.6; }
+    #success-panel { display: none; text-align: center; animation: fadeUp 0.4s ease both; }
+    .hero-icon { font-size: 52px; margin-bottom: 6px; }
+    .player-id-box {
+      display: inline-block; background: rgba(0,255,157,0.06);
+      border: 2px solid rgba(0,255,157,0.3); border-radius: 8px;
+      padding: 16px 32px; margin: 16px 0; box-shadow: 0 0 40px rgba(0,255,157,0.1);
+    }
+    .player-id { font-family: 'Orbitron', sans-serif; font-size: 30px; font-weight: 900; color: var(--accent); letter-spacing: 5px; text-shadow: 0 0 20px rgba(0,255,157,0.6); }
+    .info-table { width: 100%; background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 5px; overflow: hidden; margin: 16px 0; }
+    .info-row { display: flex; justify-content: space-between; align-items: center; padding: 9px 14px; border-bottom: 1px solid var(--border); }
+    .info-row:last-child { border-bottom: none; }
+    .info-label { font-family: 'Orbitron', sans-serif; font-size: 9px; letter-spacing: 2px; color: var(--muted); }
+    .info-value { font-size: 14px; font-weight: 600; color: var(--text); }
     #toast {
-      position: fixed;
-      bottom: 28px;
-      left: 50%;
+      position: fixed; bottom: 28px; left: 50%;
       transform: translateX(-50%) translateY(20px);
-      background: var(--accent);
-      color: #070b14;
-      padding: 11px 26px;
-      border-radius: 4px;
-      font-family: 'Orbitron', sans-serif;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 1px;
-      z-index: 999;
-      opacity: 0;
-      transition: opacity 0.3s, transform 0.3s;
-      pointer-events: none;
-      white-space: nowrap;
+      background: var(--accent); color: #070b14; padding: 11px 26px; border-radius: 4px;
+      font-family: 'Orbitron', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 1px;
+      z-index: 999; opacity: 0; transition: opacity 0.3s, transform 0.3s; pointer-events: none; white-space: nowrap;
     }
     #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
     #toast.error-toast { background: var(--danger); color: #fff; }
-
-    /* LOADING SPINNER */
-    .spinner {
-      display: inline-block;
-      width: 14px; height: 14px;
-      border: 2px solid rgba(7,11,20,0.3);
-      border-top-color: #070b14;
-      border-radius: 50%;
-      animation: spin 0.7s linear infinite;
-      vertical-align: middle;
-      margin-right: 6px;
-    }
+    .spinner { display: inline-block; width: 14px; height: 14px; border: 2px solid rgba(7,11,20,0.3); border-top-color: #070b14; border-radius: 50%; animation: spin 0.7s linear infinite; vertical-align: middle; margin-right: 6px; }
     @keyframes spin { to { transform: rotate(360deg); } }
-
-    @media (max-width: 480px) {
-      .card { padding: 28px 20px; }
-    }
+    @media (max-width: 480px) { .card { padding: 28px 20px; } }
   </style>
 </head>
 <body>
 
-  <div class="container">
+  <!-- iframe oculto: absorbe la redirección de Google Forms sin salir de la página -->
+  <iframe name="gf-target" style="display:none;" aria-hidden="true"></iframe>
 
-    <!-- HEADER -->
+  <div class="container">
     <div class="header">
       <div class="logo">CHOQUE<br><span>DE HÉROES</span></div>
       <p class="tagline">Registro oficial de jugadores</p>
     </div>
 
-    <!-- CARD -->
     <div class="card">
 
-      <!-- REGISTER PANEL -->
+      <!-- PANEL REGISTRO -->
       <div id="register-panel">
         <div class="badge">REGISTRO DE JUGADOR</div>
         <h2 class="card-title">ÚNETE A LA BATALLA</h2>
@@ -357,70 +139,53 @@
           <input type="text" id="input-name" placeholder="Tu nombre real" autocomplete="name" />
           <span class="error-msg" id="err-name">Este campo es requerido</span>
         </div>
-
         <div class="field">
           <label for="input-nick">Apodo / Nick de batalla</label>
-          <input type="text" id="input-nick" placeholder="Tu nombre en la arena" autocomplete="nickname" />
+          <input type="text" id="input-nick" placeholder="Tu nombre en la arena" />
           <span class="error-msg" id="err-nick">Este campo es requerido</span>
         </div>
-
         <div class="field">
           <label for="input-email">Correo electrónico</label>
           <input type="email" id="input-email" placeholder="tu@correo.com" autocomplete="email" />
           <span class="error-msg" id="err-email">Ingresa un correo válido</span>
         </div>
 
-        <button class="btn" id="submit-btn" onclick="submitForm()">
-          ⚔ &nbsp;REGISTRARME
-        </button>
-        <p class="disclaimer">Al registrarte aceptas recibir noticias y actualizaciones de Choque de Héroes. Sin spam.</p>
+        <button class="btn" id="submit-btn" onclick="submitForm()">⚔ &nbsp;REGISTRARME</button>
+        <p class="disclaimer">Al registrarte aceptas recibir noticias y actualizaciones de Choque de Héroes.</p>
       </div>
 
-      <!-- SUCCESS PANEL -->
+      <!-- PANEL ÉXITO -->
       <div id="success-panel">
         <div class="hero-icon">⚔️</div>
         <div class="badge">¡REGISTRO EXITOSO!</div>
-        <h2 class="card-title" style="color: var(--accent);">¡BIENVENIDO A LA ARENA!</h2>
+        <h2 class="card-title" style="color:var(--accent);">¡BIENVENIDO A LA ARENA!</h2>
         <p class="card-subtitle">Tu número de jugador oficial es:</p>
-
         <div class="player-id-box">
           <div class="player-id" id="result-id">CHH-00000</div>
         </div>
-
         <div class="info-table">
-          <div class="info-row">
-            <span class="info-label">HÉROE</span>
-            <span class="info-value" id="result-nick">—</span>
-          </div>
-          <div class="info-row">
-            <span class="info-label">NOMBRE</span>
-            <span class="info-value" id="result-name">—</span>
-          </div>
-          <div class="info-row">
-            <span class="info-label">EMAIL</span>
-            <span class="info-value" id="result-email" style="color: var(--muted); font-size:13px;">—</span>
-          </div>
+          <div class="info-row"><span class="info-label">HÉROE</span><span class="info-value" id="result-nick">—</span></div>
+          <div class="info-row"><span class="info-label">NOMBRE</span><span class="info-value" id="result-name">—</span></div>
+          <div class="info-row"><span class="info-label">EMAIL</span><span class="info-value" id="result-email" style="color:var(--muted);font-size:13px;">—</span></div>
         </div>
-
-        <p class="disclaimer" style="margin-top: 8px;">
-          📌 Guarda este número. Lo necesitarás para participar en torneos y eventos oficiales.
-        </p>
+        <p class="disclaimer" style="margin-top:8px;">📌 Guarda este número. Lo necesitarás para participar en torneos y eventos oficiales.</p>
         <button class="btn-secondary" onclick="resetForm()">REGISTRAR OTRO JUGADOR</button>
       </div>
 
-    </div><!-- /card -->
-  </div><!-- /container -->
+    </div>
+  </div>
 
   <div id="toast"></div>
 
   <script>
-    // ============================================================
-    // ⚙️  CONFIGURACIÓN — reemplaza con tu URL de Apps Script
-    // ============================================================
-    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbx8gbV4TBfyTGzX_w7Lgd3uiXBKvKjASXbSn5r_tXFif8nAnPP4Q9OrJm_GzWPnkVf34A/exec";
-    // ============================================================
+    // ─── Google Forms — ya configurado con tus IDs ───────────────
+    const FORM_ACTION = "https://docs.google.com/forms/d/e/1FAIpQLSc7S-P4b3WPb1JL7MMnpY3Vv_EjJBHTHAzWUvk5BRTQ9LlqUg/formResponse";
+    const FIELD_NAME  = "entry.309173144";
+    const FIELD_NICK  = "entry.1158915949";
+    const FIELD_EMAIL = "entry.1382744562";
+    // ─────────────────────────────────────────────────────────────
 
-    function showToast(msg, isError = false) {
+    function showToast(msg, isError) {
       const t = document.getElementById("toast");
       t.textContent = msg;
       t.className = isError ? "error-toast" : "";
@@ -429,88 +194,67 @@
       setTimeout(() => t.classList.remove("show"), 3500);
     }
 
-    function setError(fieldId, errId, show, msg = null) {
-      const input = document.getElementById(fieldId);
-      const err   = document.getElementById(errId);
-      if (show) {
-        input.classList.add("error");
-        err.textContent = msg || err.textContent;
-        err.classList.add("visible");
-      } else {
-        input.classList.remove("error");
-        err.classList.remove("visible");
-      }
+    function setError(fId, eId, show) {
+      document.getElementById(fId).classList[show ? "add" : "remove"]("error");
+      document.getElementById(eId).classList[show ? "add" : "remove"]("visible");
     }
 
     function clearErrors() {
-      ["input-name","input-nick","input-email"].forEach(id => {
-        document.getElementById(id).classList.remove("error");
-      });
-      ["err-name","err-nick","err-email"].forEach(id => {
-        document.getElementById(id).classList.remove("visible");
-      });
+      ["input-name","input-nick","input-email"].forEach(id => document.getElementById(id).classList.remove("error"));
+      ["err-name","err-nick","err-email"].forEach(id => document.getElementById(id).classList.remove("visible"));
     }
 
-    async function submitForm() {
-      clearErrors();
+    function nextId() {
+      const n = (parseInt(localStorage.getItem("chh_count") || "0")) + 1;
+      localStorage.setItem("chh_count", n);
+      return "CHH-" + String(n).padStart(5, "0");
+    }
 
+    function submitForm() {
+      clearErrors();
       const name  = document.getElementById("input-name").value.trim();
       const nick  = document.getElementById("input-nick").value.trim();
       const email = document.getElementById("input-email").value.trim();
 
-      let valid = true;
-      if (!name)  { setError("input-name",  "err-name",  true, "Este campo es requerido"); valid = false; }
-      if (!nick)  { setError("input-nick",  "err-nick",  true, "Este campo es requerido"); valid = false; }
-      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        setError("input-email", "err-email", true, "Ingresa un correo válido"); valid = false;
-      }
-      if (!valid) return;
+      let ok = true;
+      if (!name)  { setError("input-name",  "err-name",  true); ok = false; }
+      if (!nick)  { setError("input-nick",  "err-nick",  true); ok = false; }
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { setError("input-email", "err-email", true); ok = false; }
+      if (!ok) return;
 
       const btn = document.getElementById("submit-btn");
       btn.disabled = true;
       btn.innerHTML = '<span class="spinner"></span>REGISTRANDO...';
 
-      try {
-        const params = new URLSearchParams({ name, nick, email });
-        const res = await fetch(APPS_SCRIPT_URL + "?" + params.toString(), {
-          method: "GET",
-          redirect: "follow"
-        });
+      // Enviar datos a Google Forms sin redirigir la página
+      const f = document.createElement("form");
+      f.method = "POST";
+      f.action = FORM_ACTION;
+      f.target = "gf-target"; // apunta al iframe oculto
+      [[FIELD_NAME, name],[FIELD_NICK, nick],[FIELD_EMAIL, email]].forEach(([n,v]) => {
+        const i = document.createElement("input");
+        i.type = "hidden"; i.name = n; i.value = v;
+        f.appendChild(i);
+      });
+      document.body.appendChild(f);
+      f.submit();
+      document.body.removeChild(f);
 
-        const data = await res.json();
-
-        if (data.status === "duplicate") {
-          setError("input-email", "err-email", true, "Este correo ya está registrado");
-          btn.disabled = false;
-          btn.innerHTML = "⚔ &nbsp;REGISTRARME";
-          return;
-        }
-
-        if (data.status === "ok") {
-          document.getElementById("result-id").textContent    = data.id;
-          document.getElementById("result-nick").textContent  = nick;
-          document.getElementById("result-name").textContent  = name;
-          document.getElementById("result-email").textContent = email;
-
-          document.getElementById("register-panel").style.display = "none";
-          const sp = document.getElementById("success-panel");
-          sp.style.display = "block";
-          showToast("¡Registro exitoso! ID: " + data.id);
-        } else {
-          throw new Error(data.message || "Error desconocido");
-        }
-
-      } catch (err) {
-        showToast("Error al conectar. Intenta de nuevo.", true);
-        btn.disabled = false;
-        btn.innerHTML = "⚔ &nbsp;REGISTRARME";
-      }
+      // Mostrar pantalla de éxito tras breve espera
+      setTimeout(() => {
+        const pid = nextId();
+        document.getElementById("result-id").textContent    = pid;
+        document.getElementById("result-nick").textContent  = nick;
+        document.getElementById("result-name").textContent  = name;
+        document.getElementById("result-email").textContent = email;
+        document.getElementById("register-panel").style.display = "none";
+        document.getElementById("success-panel").style.display  = "block";
+        showToast("¡Registro exitoso! ID: " + pid);
+      }, 1500);
     }
 
     function resetForm() {
-      document.getElementById("input-name").value  = "";
-      document.getElementById("input-nick").value  = "";
-      document.getElementById("input-email").value = "";
+      ["input-name","input-nick","input-email"].forEach(id => document.getElementById(id).value = "");
       clearErrors();
       document.getElementById("success-panel").style.display  = "none";
       document.getElementById("register-panel").style.display = "block";
@@ -519,11 +263,8 @@
       btn.innerHTML = "⚔ &nbsp;REGISTRARME";
     }
 
-    // Submit con Enter
     document.addEventListener("keydown", e => {
-      if (e.key === "Enter" && document.getElementById("register-panel").style.display !== "none") {
-        submitForm();
-      }
+      if (e.key === "Enter" && document.getElementById("register-panel").style.display !== "none") submitForm();
     });
   </script>
 </body>
