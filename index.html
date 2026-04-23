@@ -159,9 +159,10 @@
         <div class="hero-icon">⚔️</div>
         <div class="badge">¡REGISTRO EXITOSO!</div>
         <h2 class="card-title" style="color:var(--accent);">¡BIENVENIDO A LA ARENA!</h2>
-        <p class="card-subtitle">Tu número de jugador oficial es:</p>
-        <div class="player-id-box">
-          <div class="player-id" id="result-id">CHH-00000</div>
+        <p class="card-subtitle">Tu registro fue recibido exitosamente.</p>
+        <div class="player-id-box" style="padding:14px 24px;">
+          <p style="font-family:'Orbitron',sans-serif;font-size:11px;letter-spacing:2px;color:#00ff9d;margin:0 0 6px;">TU ID DE JUGADOR</p>
+          <p style="font-family:'Rajdhani',sans-serif;font-size:14px;color:#e8eaf6;margin:0;line-height:1.5;">✉ Te lo enviaremos por correo electrónico</p>
         </div>
         <div class="info-table">
           <div class="info-row"><span class="info-label">HÉROE</span><span class="info-value" id="result-nick">—</span></div>
@@ -204,12 +205,6 @@
       ["err-name","err-nick","err-email"].forEach(id => document.getElementById(id).classList.remove("visible"));
     }
 
-    function nextId() {
-      const n = (parseInt(localStorage.getItem("chh_count") || "0")) + 1;
-      localStorage.setItem("chh_count", n);
-      return "CHH-" + String(n).padStart(5, "0");
-    }
-
     function submitForm() {
       clearErrors();
       const name  = document.getElementById("input-name").value.trim();
@@ -242,14 +237,12 @@
 
       // Mostrar pantalla de éxito tras breve espera
       setTimeout(() => {
-        const pid = nextId();
-        document.getElementById("result-id").textContent    = pid;
         document.getElementById("result-nick").textContent  = nick;
         document.getElementById("result-name").textContent  = name;
         document.getElementById("result-email").textContent = email;
         document.getElementById("register-panel").style.display = "none";
         document.getElementById("success-panel").style.display  = "block";
-        showToast("¡Registro exitoso! ID: " + pid);
+        showToast("¡Registro exitoso! Revisa tu correo.");
       }, 1500);
     }
 
